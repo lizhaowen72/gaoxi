@@ -15,6 +15,8 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
 
@@ -145,6 +147,41 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.6.5</version>
+                <configuration>
+                    <container>
+                        <!-- 指明使用的tomcat服务器版本 -->
+                        <containerId>tomcat8x</containerId>
+                        <type>remote</type>
+                    </container>
+                    <configuration>
+                        <type>runtime</type>
+                        <cargo.remote.username>admin</cargo.remote.username>
+                        <cargo.remote.password>jishimen2019</cargo.remote.password>
+                    </configuration>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
             </plugin>
         </plugins>
     </build>
